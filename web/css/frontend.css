@@ -1,0 +1,70 @@
+span.icon {
+  background-color: #ddd;
+  padding: 3px 8px 3px 25px;
+  margin: 0 5px;
+  line-height: 30px;
+  background-position: 5px;
+  -moz-border-radius: 8px;
+}
+
+
+/** TABLE **/
+#content table {
+  width: 100%;
+}
+
+#content table thead th {
+  background: #E7EEF6;
+}
+
+#content table tr {
+  border: #DDDDDD solid 1px;
+}
+
+
+/** MISC **/
+.even, .odd {
+  /*border-bottom: #000 solid 1px;*/
+}
+.even:hover, .odd:hover {
+  background: #FFFFEE;
+  cursor: pointer;
+}
+.odd {
+  /*background: #eee;*/
+}
+
+
+/** ICONS **/
+
+.iconPhone {
+  background: url('/images/icon/phone.png') no-repeat;
+}
+
+.iconBrevete {
+  background: url('/images/icon/brevete.png') no-repeat;
+}
+
+.iconPropia {
+  background: url('/images/icon/t77.png') no-repeat;
+}
+
+.iconTipoUnidad {
+  background: url('/images/icon/carreta.png') no-repeat;
+}
+
+.iconConf {
+  background: url('/images/icon/conf.png') no-repeat;
+}
+
+.iconTara {
+  background: url('/images/icon/peso.png') no-repeat;
+}.iconTara:after { content: " kg"; }
+
+.iconCarreta {
+  background: url('/images/icon/carreta.png') no-repeat;
+}
+
+.iconPeso {
+  background: url('/images/icon/peso.png') no-repeat;
+}.iconPeso:after { content: " kg"; }

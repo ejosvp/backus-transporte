@@ -1,0 +1,347 @@
+Area:
+  columns:
+    id:
+      primary: true
+      type: integer
+      autoincrement: true
+    name:
+      type: string(40)
+      notnull: true
+TipoLugar:
+  columns:
+    id:
+      primary: true
+      type: integer
+      autoincrement: true
+    name:
+      type: string(40)
+      notnull: true
+Empresa:
+  columns:
+    id:
+      primary: true
+      type: integer
+      autoincrement: true
+    name:
+      type: string(40)
+      notnull: true
+Motivo:
+  columns:
+    id:
+      primary: true
+      type: integer
+      autoincrement: true
+    name:
+      type: string(40)
+      notnull: true
+Supervisor:
+  columns:
+    id:
+      primary: true
+      type: integer
+      autoincrement: true
+    sf_guard_user_id: integer(4)
+    name:
+      type: string(40)
+      notnull: true
+    last_name:
+      type: string(40)
+      notnull: true
+    email:
+      type: string(60)
+  relations:
+    User:
+      class: sfGuardUser
+      foreignType: one
+TipoCarga:
+  columns:
+    id:
+      primary: true
+      type: integer
+      autoincrement: true
+    area_id:
+      type: integer
+      notnull: true
+    name:
+      type: string(40)
+      notnull: true
+  relations:
+    Area:
+      foreignAlias: Areas
+      onDelete: RESTRICT
+      local: area_id
+      foreign: id
+Lugar:
+  columns:
+    id:
+      primary: true
+      type: integer
+      autoincrement: true
+    tipo_lugar_id:
+      type: integer
+      notnull: true
+    name:
+      type: string(40)
+      notnull: true
+  relations:
+    TipoLugar:
+      foreignAlias: Lugares
+      onDelete: RESTRICT
+      local: tipo_lugar_id
+      foreign: id
+Chofer:
+  columns:
+    id:
+      primary: true
+      type: integer
+      autoincrement: true
+    name:
+      type: string(40)
+      notnull: true
+    telefono:
+      type: integer(15)
+      notnull: true
+    brevete:
+      type: integer(12)
+      notnull: true
+    empresa_id:
+      type: integer
+      notnull: true
+  relations:
+    Empresa:
+      foreignAlias: Choferes
+      onDelete: RESTRICT
+      local: empresa_id
+      foreign: id
+Carreta:
+  columns:
+    id:
+      primary: true
+      type: integer
+      autoincrement: true
+    placa:
+      type: string(8)
+      notnull: true
+    peso:
+      type: float
+      notnull: true
+    configuracion:
+      type: string(10)
+      notnull: true
+    propia:
+      type: boolean
+      notnull: true
+    tara:
+      type: integer
+      notnull: true
+    tipo_unidad:
+      type: string(15)
+      notnull: true
+    empresa_id:
+      type: integer
+      notnull: true
+  relations:
+    Empresa:
+      foreignAlias: Carretas
+      onDelete: RESTRICT
+      local: empresa_id
+      foreign: id
+Tracto:
+  columns:
+    id:
+      primary: true
+      type: integer
+      autoincrement: true
+    placa:
+      type: string(8)
+      notnull: true
+    peso:
+      type: float
+      notnull: true
+    configuracion:
+      type: string(10)
+      notnull: true
+    propia:
+      type: boolean
+      notnull: true
+    tara:
+      type: integer
+      notnull: true
+    tipo_unidad:
+      type: string(15)
+      notnull: true
+    empresa_id:
+      type: integer
+      notnull: true
+  relations:
+    Empresa:
+      foreignAlias: Tractos
+      onDelete: RESTRICT
+      local: empresa_id
+      foreign: id
+Registro:
+  actAs:
+    Timestampable: 
+  columns:
+    id:
+      primary: true
+      type: integer
+      autoincrement: true
+    empresa_id:
+      type: integer
+      notnull: true
+    chofer_id:
+      type: integer
+      notnull: true
+    tracto_id:
+      type: integer
+      notnull: true
+    carreta_id:
+      type: integer
+      notnull: true
+    lugar_id:
+      type: integer
+      notnull: true
+    tipo_carga_id:
+      type: integer
+      notnull: true
+    motivo_id:
+      type: integer
+      notnull: true
+    cantidad:
+      type: integer
+      notnull: true
+    guia1:
+      type: string(15)
+      notnull: true
+    guia2:
+      type: string(15)
+      notnull: true
+    estado:
+      type: integer(1)
+      notnull: true
+    observacion:
+      type: string
+    ingreso_at:
+      type: timestamp
+      notnull: true
+  relations:
+    Empresa:
+      onDelete: RESTRICT
+      local: empresa_id
+      foreign: id
+    Chofer:
+      onDelete: RESTRICT
+      local: chofer_id
+      foreign: id
+    Tracto:
+      onDelete: RESTRICT
+      local: tracto_id
+      foreign: id
+    Carreta:
+      onDelete: RESTRICT
+      local: carreta_id
+      foreign: id
+    Lugar:
+      onDelete: RESTRICT
+      local: lugar_id
+      foreign: id
+    TipoCarga:
+      onDelete: RESTRICT
+      local: tipo_carga_id
+      foreign: id
+    Motivo:
+      onDelete: RESTRICT
+      local: motivo_id
+      foreign: id
+Operacion:
+  actAs:
+    Timestampable: 
+  columns:
+    id:
+      primary: true
+      type: integer
+      autoincrement: true
+    registro_id:
+      type: integer
+      notnull: true
+    supervisor_id:
+      type: integer
+      notnull: true
+    observacion:
+      type: string
+    tipo:
+      type: integer(1)
+      notnull: true
+  relations:
+    Registro:
+      onDelete: RESTRICT
+      local: registro_id
+      foreign: id
+      type: one
+    Supervisor:
+      onDelete: RESTRICT
+      local: supervisor_id
+      foreign: id
+Salida:
+  actAs:
+    Timestampable: 
+  columns:
+    id:
+      primary: true
+      type: integer
+      autoincrement: true
+    registro_id:
+      type: integer
+      notnull: true
+    chofer_id:
+      type: integer
+      notnull: true
+    tracto_id:
+      type: integer
+      notnull: true
+    carreta_id:
+      type: integer
+      notnull: true
+    tipo_carga_id:
+      type: integer
+      notnull: true
+    lugar_id:
+      type: integer
+      notnull: true
+    cantidad:
+      type: integer
+    guia1:
+      type: string(15)
+      notnull: true
+    guia2:
+      type: string(15)
+      notnull: true
+    observacion:
+      type: string
+  relations:
+    Registro:
+      onDelete: RESTRICT
+      local: registro_id
+      foreign: id
+      type: one
+    Chofer:
+      onDelete: RESTRICT
+      local: chofer_id
+      foreign: id
+    Tracto:
+      onDelete: RESTRICT
+      local: tracto_id
+      foreign: id
+    Carreta:
+      onDelete: RESTRICT
+      local: carreta_id
+      foreign: id
+    Lugar:
+      onDelete: RESTRICT
+      local: lugar_id
+      foreign: id
+    TipoCarga:
+      onDelete: RESTRICT
+      local: tipo_carga_id
+      foreign: id
