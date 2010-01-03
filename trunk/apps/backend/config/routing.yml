@@ -1,0 +1,94 @@
+tracto:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Tracto
+    module:               tracto
+    prefix_path:          /tracto
+    column:               id
+    with_wildcard_routes: true
+
+carreta:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Carreta
+    module:               carreta
+    prefix_path:          /carreta
+    column:               id
+    with_wildcard_routes: true
+
+chofer:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Chofer
+    module:               chofer
+    prefix_path:          /chofer
+    column:               id
+    with_wildcard_routes: true
+
+lugar:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Lugar
+    module:               lugar
+    prefix_path:          /lugar
+    column:               id
+    with_wildcard_routes: true
+
+tipo_carga:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                TipoCarga
+    module:               tipo_carga
+    prefix_path:          /tipo_carga
+    column:               id
+    with_wildcard_routes: true
+
+supervisor:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Supervisor
+    module:               supervisor
+    prefix_path:          /supervisor
+    column:               id
+    with_wildcard_routes: true
+
+motivo:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Motivo
+    module:               motivo
+    prefix_path:          /motivo
+    column:               id
+    with_wildcard_routes: true
+
+empresa:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Empresa
+    module:               empresa
+    prefix_path:          /empresa
+    column:               id
+    with_wildcard_routes: true
+
+tipo_lugar:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                TipoLugar
+    module:               tipo_lugar
+    prefix_path:          /tipo_lugar
+    column:               id
+    with_wildcard_routes: true
+
+area:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Area
+    module:               area
+    prefix_path:          /area
+    column:               id
+    with_wildcard_routes: true
+
+# default rules
+homepage:
+  url:   /
+  param: { module: area, action: index }

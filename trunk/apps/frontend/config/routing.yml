@@ -1,0 +1,41 @@
+operacion:
+  class:   sfDoctrineRouteCollection
+  options: { model: Operacion }
+
+salida:
+  class:   sfDoctrineRouteCollection
+  options: { model: Salida }
+
+registro:
+  class:    sfDoctrineRouteCollection
+  options: { model: Registro }
+
+registrar:
+  url:     /registrar
+  param:   { module: registro, action: new }
+
+ingreso:
+  url:     /ingreso
+  param:   { module: registro, action: index }
+
+ingresar:
+  url:     /ingresar/:id
+  class:   sfDoctrineRoute
+  options: { model: Registro, type: object }
+  param:   { module: registro, action: ingreso }
+  requirements:
+    id: \d+
+    sf_method: [get]
+
+reload:
+  url:     /reload
+  param:   { module: registro, action: reload }
+
+loaddata:
+  url:     /loaddata
+  param:   { module: registro, action: load }
+
+# default rules
+homepage:
+  url:   /
+  param: { module: registro, action: new }
