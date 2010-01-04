@@ -22,7 +22,8 @@
         <ul>
           <li><?php echo link_to('Registro','@registrar') ?></li>
           <li><?php echo link_to('Ingreso','@ingreso') ?></li>
-          <li><?php echo link_to('Operacion','@operacion') ?></li>
+          <li><?php echo link_to('Operacion Descarga','@descarga') ?></li>
+          <li><?php echo link_to('Operacion Carga','@carga') ?></li>
           <li><?php echo link_to('Salida','@salida') ?></li>
           <li><?php echo link_to('Salir','@sf_guard_signout') ?></li>
         </ul>

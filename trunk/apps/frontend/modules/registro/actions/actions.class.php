@@ -49,6 +49,7 @@ class registroActions extends sfActions
   {
     $ob = $this->getRoute()->getObject();
     $ob->setEstado('1');
+    $ob->setIngresoAt(date('Y-m-d H:i:s',time()));
     $ob->save();
     return sfView::NONE;
   }

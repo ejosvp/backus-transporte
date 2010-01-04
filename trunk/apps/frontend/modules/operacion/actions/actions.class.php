@@ -12,7 +12,21 @@ class operacionActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    $this->operacions = $this->getRoute()->getObjects();
+    $this->operacions = Doctrine::getTable('Registro')->getPorCargar();
+  }
+
+  public function executeDescarga(sfWebRequest $request)
+  {
+    $this->registros = Doctrine::getTable('Registro')->getPorDescargar();
+    $this->titulo = "Descarga";
+    $this->setTemplate('index');
+  }
+
+  public function executeCarga(sfWebRequest $request)
+  {
+    $this->registros = Doctrine::getTable('Registro')->getPorCargar();
+    $this->titulo = "Carga";
+    $this->setTemplate('index');
   }
 
   public function executeNew(sfWebRequest $request)

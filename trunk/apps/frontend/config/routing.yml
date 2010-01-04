@@ -1,3 +1,19 @@
+descarga:
+  url:     /descarga
+  class:   sfDoctrineRoute
+  options: { model: Operacion, type: object }
+  param:   { module: operacion, action: descarga }
+  requirements:
+    sf_method: [get]
+
+carga:
+  url:     /carga
+  class:   sfDoctrineRoute
+  options: { model: Operacion, type: object }
+  param:   { module: operacion, action: carga }
+  requirements:
+    sf_method: [get]
+
 operacion:
   class:   sfDoctrineRouteCollection
   options: { model: Operacion }

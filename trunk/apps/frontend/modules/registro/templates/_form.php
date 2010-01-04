@@ -18,9 +18,8 @@
     </tfoot>
     <tbody>
       <tr>
-        <th>Fecha<br />Hora</th>
+        <th>Hora</th>
         <td>
-          <?php echo format_date(time(),'D','es_PE') ?><br />
           <span id="hora"></span>
         </td>
       </tr>
