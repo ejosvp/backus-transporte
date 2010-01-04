@@ -1,30 +1,44 @@
-<h1>Operacions List</h1>
+<?php use_helper('ysJQueryRevolutions') ?>
+<?php use_helper('Date') ?>
+
+<h1>Pendientes para <?php echo $titulo ?></h1>
+
+<div>
+  N&ordm; <span id="numero"></span>
+
+<span id="crono"></span>
+<a id="ini" href="#" onclick="IniciarCrono();$('#ini').hide();$('#det').show();">iniciar</a>
+<a id="det" style="display: none" href="#" onclick="DetenerCrono()">detener</a>
+</div>
 
 <table>
   <thead>
     <tr>
-      <th>Id</th>
-      <th>Registro</th>
-      <th>Supervisor</th>
-      <th>Observacion</th>
-      <th>Tipo</th>
-      <th>Created at</th>
-      <th>Updated at</th>
+      <th>numero</th>
+      <th>nombre</th>
+      <th>placa</th>
+      <th>hora registro</th>
+      <th>hora ingreso</th>
+      <th>inicio</th>
+      <th>fin</th>
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($operacions as $operacion): ?>
-    <tr>
-      <td><a href="<?php echo url_for('operacion/edit?id='.$operacion->getId()) ?>"><?php echo $operacion->getId() ?></a></td>
-      <td><?php echo $operacion->getRegistroId() ?></td>
-      <td><?php echo $operacion->getSupervisorId() ?></td>
-      <td><?php echo $operacion->getObservacion() ?></td>
-      <td><?php echo $operacion->getTipo() ?></td>
-      <td><?php echo $operacion->getCreatedAt() ?></td>
-      <td><?php echo $operacion->getUpdatedAt() ?></td>
+    <?php foreach ($registros as $registro): ?>
+    <tr id="registro-<?php echo $registro->getId() ?>" class="<?php echo fmod($i, 2) ? 'even' : 'odd' ?>">
+      <td id="id-<?php echo $registro->getId() ?>"><?php echo $registro->getId() ?></td>
+      <td><?php echo $registro->getChofer() ?></td>
+      <td><?php echo $registro->getTracto() ?></td>
+      <td><?php echo $registro->getCreatedAt() ?></td>
+      <td><?php echo $registro->getIngresoAt() ?></td>
     </tr>
+    <?php echo core_init_javasacript_tag() ?>
+    <?php echo jquery_support(
+      '#registro-'.$registro->getId(),
+      'click',
+      like_function("$('#numero').text($('#id-".$registro->getId()."').text())"));
+    ?>
+    <?php echo core_end_javasacript_tag() ?>
     <?php endforeach; ?>
   </tbody>
 </table>
-
-  <a href="<?php echo url_for('operacion/new') ?>">New</a>

@@ -12,5 +12,8 @@
  */
 class Supervisor extends BaseSupervisor
 {
-
+  public function getNombre()
+  {
+    return $this->getName()." ".$this->getLastName();
+  }
 }
