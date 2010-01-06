@@ -199,7 +199,7 @@ function jquery_periodically_ajax($configurations = null){
 function jquery_ajax_form($selector,$configurations, $submit = false , $isInternal = false){
     $configurations['data'] = (isset($configurations['data']))? 'dataForm + "&" +' .  $configurations['data'] : 'dataForm';
     return  add_jquery_support(
-            '#myForm',
+            $selector,
             'submit',
             like_function(
               sprintf(
