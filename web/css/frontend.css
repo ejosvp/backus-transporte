@@ -28,10 +28,12 @@ span.icon {
 }
 .even:hover, .odd:hover {
   background: #FFFFEE;
-  cursor: pointer;
 }
 .odd {
   /*background: #eee;*/
+}
+.addPointer {
+  cursor: pointer;
 }
 
 

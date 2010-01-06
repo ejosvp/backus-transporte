@@ -1,3 +1,11 @@
+#menu li
+{
+  padding: 15px 8px 7px;
+  line-height: 47px;
+  display: inline;
+  text-align: center;
+}
+
 #sf_admin_container fieldset h2
 {
   font-size: 110%;

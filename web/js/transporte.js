@@ -32,7 +32,7 @@ function DetenerCrono (){
   CronoEjecutandose = false
 }
 
-function InicializarCrono () {
+function InicializarCrono (lugar) {
 //inicializa contadores globales
 decimas = 0
 segundos = 0
@@ -40,10 +40,10 @@ minutos = 0
 horas = 0
 
 //pone a cero los marcadores
-document.getElementById('crono').innerHTML = '00:00:00:0'
+lugar.html('00:00:00:0');
 }
 
-function MostrarCrono () {
+function MostrarCrono (lugar) {
 
   //incrementa el crono
 decimas++
@@ -72,17 +72,17 @@ ValorCrono += (minutos < 10) ? ":0" + minutos : ":" + minutos
 ValorCrono += (segundos < 10) ? ":0" + segundos : ":" + segundos
 ValorCrono += ":" + decimas
 
-  document.getElementById('crono').innerHTML = ValorCrono
+  lugar.html(ValorCrono);
 
   CronoID = setTimeout("MostrarCrono()", 100)
 CronoEjecutandose = true
 return true
 }
 
-function IniciarCrono () {
+function IniciarCrono (lugar) {
   if(!CronoEjecutandose) {
     DetenerCrono()
-    InicializarCrono()
-    MostrarCrono()
+    InicializarCrono(lugar)
+    MostrarCrono(lugar)
   }
 }

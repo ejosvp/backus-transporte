@@ -156,3 +156,28 @@ body
 {
   vertical-align: middle;
 }
+
+
+
+
+/** MISC **/
+
+.notice {
+  background: #FFF9D7 url('/images/icon/notice.png') no-repeat;
+  border: 1px solid #E2C822;
+}
+.error {
+  background: #ffebe8 url('/images/icon/error.png') no-repeat;
+  border: 1px solid #dd3c10;
+}
+.error, .notice{
+  background-position: 10px 50%;
+  padding: 8px 5px 8px 35px;
+  margin: 8px;
+}
+.error_list {
+  color: #fff;
+  background: none;
+  padding: 5px;
+  color: #b81900;
+}
