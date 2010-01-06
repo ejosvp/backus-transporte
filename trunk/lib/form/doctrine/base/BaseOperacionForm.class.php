@@ -20,6 +20,7 @@ abstract class BaseOperacionForm extends BaseFormDoctrine
       'supervisor_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Supervisor'), 'add_empty' => false)),
       'observacion'   => new sfWidgetFormTextarea(),
       'tipo'          => new sfWidgetFormInputText(),
+      'termino_at'    => new sfWidgetFormDateTime(),
       'created_at'    => new sfWidgetFormDateTime(),
       'updated_at'    => new sfWidgetFormDateTime(),
     ));
@@ -30,6 +31,7 @@ abstract class BaseOperacionForm extends BaseFormDoctrine
       'supervisor_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Supervisor'))),
       'observacion'   => new sfValidatorString(array('required' => false)),
       'tipo'          => new sfValidatorInteger(),
+      'termino_at'    => new sfValidatorDateTime(),
       'created_at'    => new sfValidatorDateTime(),
       'updated_at'    => new sfValidatorDateTime(),
     ));

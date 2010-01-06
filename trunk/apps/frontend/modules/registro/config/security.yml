@@ -1,0 +1,4 @@
+new:
+  credentials: [registro]
+index:
+  credentials: [ingreso]

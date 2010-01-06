@@ -34,6 +34,9 @@ Motivo:
     name:
       type: string(40)
       notnull: true
+    tipo:
+      type: boolean
+      notnull: true
 Supervisor:
   columns:
     id:
@@ -198,7 +201,7 @@ Registro:
       notnull: true
     carreta_id:
       type: integer
-      notnull: true
+      notnull: false
     lugar_id:
       type: integer
       notnull: true
@@ -216,7 +219,6 @@ Registro:
       notnull: true
     guia2:
       type: string(15)
-      notnull: true
     estado:
       type: integer(1)
       notnull: true
@@ -254,6 +256,18 @@ Registro:
       onDelete: RESTRICT
       local: motivo_id
       foreign: id
+    Operacion:
+      onDelete: RESTRICT
+      local: id
+      foreignAlias: Registros
+      foreign: registro_id
+    Salida:
+      onDelete: RESTRICT
+      local: id
+      foreign: registro_id
+      foreignAlias: Registro
+      foreignType: one
+      type: one
 Operacion:
   actAs:
     Timestampable: 
@@ -273,15 +287,18 @@ Operacion:
     tipo:
       type: integer(1)
       notnull: true
+    termino_at:
+      type: timestamp
+      notnull: true
   relations:
-    Registro:
-      onDelete: RESTRICT
-      local: registro_id
-      foreign: id
-      type: one
     Supervisor:
       onDelete: RESTRICT
       local: supervisor_id
+      foreign: id
+    Registro:
+      onDelete: RESTRICT
+      foreignAlias: Operaciones
+      local: registro_id
       foreign: id
 Salida:
   actAs:
@@ -323,7 +340,9 @@ Salida:
     Registro:
       onDelete: RESTRICT
       local: registro_id
+      foreignAlias: Salida
       foreign: id
+      foreignType: one
       type: one
     Chofer:
       onDelete: RESTRICT

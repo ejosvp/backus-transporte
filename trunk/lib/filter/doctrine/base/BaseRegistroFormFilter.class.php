@@ -22,7 +22,7 @@ abstract class BaseRegistroFormFilter extends BaseFormFilterDoctrine
       'motivo_id'     => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Motivo'), 'add_empty' => true)),
       'cantidad'      => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'guia1'         => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'guia2'         => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'guia2'         => new sfWidgetFormFilterInput(),
       'estado'        => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'observacion'   => new sfWidgetFormFilterInput(),
       'ingreso_at'    => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),

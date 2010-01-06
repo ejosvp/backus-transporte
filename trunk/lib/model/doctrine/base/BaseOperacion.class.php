@@ -10,23 +10,26 @@
  * @property integer $supervisor_id
  * @property string $observacion
  * @property integer $tipo
- * @property Registro $Registro
+ * @property timestamp $termino_at
  * @property Supervisor $Supervisor
+ * @property Registro $Registro
  * 
  * @method integer    getId()            Returns the current record's "id" value
  * @method integer    getRegistroId()    Returns the current record's "registro_id" value
  * @method integer    getSupervisorId()  Returns the current record's "supervisor_id" value
  * @method string     getObservacion()   Returns the current record's "observacion" value
  * @method integer    getTipo()          Returns the current record's "tipo" value
- * @method Registro   getRegistro()      Returns the current record's "Registro" value
+ * @method timestamp  getTerminoAt()     Returns the current record's "termino_at" value
  * @method Supervisor getSupervisor()    Returns the current record's "Supervisor" value
+ * @method Registro   getRegistro()      Returns the current record's "Registro" value
  * @method Operacion  setId()            Sets the current record's "id" value
  * @method Operacion  setRegistroId()    Sets the current record's "registro_id" value
  * @method Operacion  setSupervisorId()  Sets the current record's "supervisor_id" value
  * @method Operacion  setObservacion()   Sets the current record's "observacion" value
  * @method Operacion  setTipo()          Sets the current record's "tipo" value
- * @method Operacion  setRegistro()      Sets the current record's "Registro" value
+ * @method Operacion  setTerminoAt()     Sets the current record's "termino_at" value
  * @method Operacion  setSupervisor()    Sets the current record's "Supervisor" value
+ * @method Operacion  setRegistro()      Sets the current record's "Registro" value
  * 
  * @package    transporte
  * @subpackage model
@@ -59,18 +62,22 @@ abstract class BaseOperacion extends sfDoctrineRecord
              'notnull' => true,
              'length' => '1',
              ));
+        $this->hasColumn('termino_at', 'timestamp', null, array(
+             'type' => 'timestamp',
+             'notnull' => true,
+             ));
     }
 
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Registro', array(
-             'local' => 'registro_id',
+        $this->hasOne('Supervisor', array(
+             'local' => 'supervisor_id',
              'foreign' => 'id',
              'onDelete' => 'RESTRICT'));
 
-        $this->hasOne('Supervisor', array(
-             'local' => 'supervisor_id',
+        $this->hasOne('Registro', array(
+             'local' => 'registro_id',
              'foreign' => 'id',
              'onDelete' => 'RESTRICT'));
 

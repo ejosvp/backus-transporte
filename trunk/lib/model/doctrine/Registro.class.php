@@ -19,4 +19,8 @@ class Registro extends BaseRegistro
     else
       return "2";
   }
+  public function getGuia()
+  {
+    return $this->getGuia1()."/".$this->getGuia1();
+  }
 }
