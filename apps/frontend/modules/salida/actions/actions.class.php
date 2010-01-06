@@ -12,7 +12,7 @@ class salidaActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    $this->salidas = $this->getRoute()->getObjects();
+    $this->salidas = Doctrine::getTable('Registro')->getPorSalir();
   }
 
   public function executeNew(sfWebRequest $request)

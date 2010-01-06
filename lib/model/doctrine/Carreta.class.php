@@ -14,6 +14,6 @@ class Carreta extends BaseCarreta
 {
   public function __toString()
   {
-    return $this->getPlaca();
+    return (!is_null($this->getPlaca()) ? $this->getPlaca() : '' );
   }
 }

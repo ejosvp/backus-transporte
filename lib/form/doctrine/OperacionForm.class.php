@@ -12,5 +12,12 @@ class OperacionForm extends BaseOperacionForm
 {
   public function configure()
   {
+    $this->fields();
+  }
+  protected function fields()
+  {
+    $this->useFields(array(
+      'observacion',
+    ));
   }
 }

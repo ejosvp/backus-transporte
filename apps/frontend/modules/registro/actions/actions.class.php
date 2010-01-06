@@ -42,15 +42,18 @@ class registroActions extends sfActions
 
   public function executeIndex(sfWebRequest $request)
   {
-    $this->registros = Doctrine::getTable('Registro')->getRegistrosActivos();
+    $this->registros = Doctrine::getTable('Registro')->getPorIngresar();
   }
 
   public function executeIngreso(sfWebRequest $request)
   {
-    $ob = $this->getRoute()->getObject();
-    $ob->setEstado('1');
-    $ob->setIngresoAt(date('Y-m-d H:i:s',time()));
-    $ob->save();
+    $registro = $this->getRoute()->getObject();
+    if($registro->getMotivo()->getTipo() == '0')
+      $registro->setEstado('1');
+    else
+      $registro->setEstado('3');
+    $registro->setIngresoAt(date('Y-m-d H:i:s',time()));
+    $registro->save();
     return sfView::NONE;
   }
 

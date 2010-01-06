@@ -26,55 +26,55 @@
  * @property Lugar $Lugar
  * @property TipoCarga $TipoCarga
  * @property Motivo $Motivo
- * @property Doctrine_Collection $Operacion
- * @property Doctrine_Collection $Salida
+ * @property Operacion $Operacion
+ * @property Salida $Salida
  * 
- * @method integer             getId()            Returns the current record's "id" value
- * @method integer             getEmpresaId()     Returns the current record's "empresa_id" value
- * @method integer             getChoferId()      Returns the current record's "chofer_id" value
- * @method integer             getTractoId()      Returns the current record's "tracto_id" value
- * @method integer             getCarretaId()     Returns the current record's "carreta_id" value
- * @method integer             getLugarId()       Returns the current record's "lugar_id" value
- * @method integer             getTipoCargaId()   Returns the current record's "tipo_carga_id" value
- * @method integer             getMotivoId()      Returns the current record's "motivo_id" value
- * @method integer             getCantidad()      Returns the current record's "cantidad" value
- * @method string              getGuia1()         Returns the current record's "guia1" value
- * @method string              getGuia2()         Returns the current record's "guia2" value
- * @method integer             getEstado()        Returns the current record's "estado" value
- * @method string              getObservacion()   Returns the current record's "observacion" value
- * @method timestamp           getIngresoAt()     Returns the current record's "ingreso_at" value
- * @method Empresa             getEmpresa()       Returns the current record's "Empresa" value
- * @method Chofer              getChofer()        Returns the current record's "Chofer" value
- * @method Tracto              getTracto()        Returns the current record's "Tracto" value
- * @method Carreta             getCarreta()       Returns the current record's "Carreta" value
- * @method Lugar               getLugar()         Returns the current record's "Lugar" value
- * @method TipoCarga           getTipoCarga()     Returns the current record's "TipoCarga" value
- * @method Motivo              getMotivo()        Returns the current record's "Motivo" value
- * @method Doctrine_Collection getOperacion()     Returns the current record's "Operacion" collection
- * @method Doctrine_Collection getSalida()        Returns the current record's "Salida" collection
- * @method Registro            setId()            Sets the current record's "id" value
- * @method Registro            setEmpresaId()     Sets the current record's "empresa_id" value
- * @method Registro            setChoferId()      Sets the current record's "chofer_id" value
- * @method Registro            setTractoId()      Sets the current record's "tracto_id" value
- * @method Registro            setCarretaId()     Sets the current record's "carreta_id" value
- * @method Registro            setLugarId()       Sets the current record's "lugar_id" value
- * @method Registro            setTipoCargaId()   Sets the current record's "tipo_carga_id" value
- * @method Registro            setMotivoId()      Sets the current record's "motivo_id" value
- * @method Registro            setCantidad()      Sets the current record's "cantidad" value
- * @method Registro            setGuia1()         Sets the current record's "guia1" value
- * @method Registro            setGuia2()         Sets the current record's "guia2" value
- * @method Registro            setEstado()        Sets the current record's "estado" value
- * @method Registro            setObservacion()   Sets the current record's "observacion" value
- * @method Registro            setIngresoAt()     Sets the current record's "ingreso_at" value
- * @method Registro            setEmpresa()       Sets the current record's "Empresa" value
- * @method Registro            setChofer()        Sets the current record's "Chofer" value
- * @method Registro            setTracto()        Sets the current record's "Tracto" value
- * @method Registro            setCarreta()       Sets the current record's "Carreta" value
- * @method Registro            setLugar()         Sets the current record's "Lugar" value
- * @method Registro            setTipoCarga()     Sets the current record's "TipoCarga" value
- * @method Registro            setMotivo()        Sets the current record's "Motivo" value
- * @method Registro            setOperacion()     Sets the current record's "Operacion" collection
- * @method Registro            setSalida()        Sets the current record's "Salida" collection
+ * @method integer   getId()            Returns the current record's "id" value
+ * @method integer   getEmpresaId()     Returns the current record's "empresa_id" value
+ * @method integer   getChoferId()      Returns the current record's "chofer_id" value
+ * @method integer   getTractoId()      Returns the current record's "tracto_id" value
+ * @method integer   getCarretaId()     Returns the current record's "carreta_id" value
+ * @method integer   getLugarId()       Returns the current record's "lugar_id" value
+ * @method integer   getTipoCargaId()   Returns the current record's "tipo_carga_id" value
+ * @method integer   getMotivoId()      Returns the current record's "motivo_id" value
+ * @method integer   getCantidad()      Returns the current record's "cantidad" value
+ * @method string    getGuia1()         Returns the current record's "guia1" value
+ * @method string    getGuia2()         Returns the current record's "guia2" value
+ * @method integer   getEstado()        Returns the current record's "estado" value
+ * @method string    getObservacion()   Returns the current record's "observacion" value
+ * @method timestamp getIngresoAt()     Returns the current record's "ingreso_at" value
+ * @method Empresa   getEmpresa()       Returns the current record's "Empresa" value
+ * @method Chofer    getChofer()        Returns the current record's "Chofer" value
+ * @method Tracto    getTracto()        Returns the current record's "Tracto" value
+ * @method Carreta   getCarreta()       Returns the current record's "Carreta" value
+ * @method Lugar     getLugar()         Returns the current record's "Lugar" value
+ * @method TipoCarga getTipoCarga()     Returns the current record's "TipoCarga" value
+ * @method Motivo    getMotivo()        Returns the current record's "Motivo" value
+ * @method Operacion getOperacion()     Returns the current record's "Operacion" value
+ * @method Salida    getSalida()        Returns the current record's "Salida" value
+ * @method Registro  setId()            Sets the current record's "id" value
+ * @method Registro  setEmpresaId()     Sets the current record's "empresa_id" value
+ * @method Registro  setChoferId()      Sets the current record's "chofer_id" value
+ * @method Registro  setTractoId()      Sets the current record's "tracto_id" value
+ * @method Registro  setCarretaId()     Sets the current record's "carreta_id" value
+ * @method Registro  setLugarId()       Sets the current record's "lugar_id" value
+ * @method Registro  setTipoCargaId()   Sets the current record's "tipo_carga_id" value
+ * @method Registro  setMotivoId()      Sets the current record's "motivo_id" value
+ * @method Registro  setCantidad()      Sets the current record's "cantidad" value
+ * @method Registro  setGuia1()         Sets the current record's "guia1" value
+ * @method Registro  setGuia2()         Sets the current record's "guia2" value
+ * @method Registro  setEstado()        Sets the current record's "estado" value
+ * @method Registro  setObservacion()   Sets the current record's "observacion" value
+ * @method Registro  setIngresoAt()     Sets the current record's "ingreso_at" value
+ * @method Registro  setEmpresa()       Sets the current record's "Empresa" value
+ * @method Registro  setChofer()        Sets the current record's "Chofer" value
+ * @method Registro  setTracto()        Sets the current record's "Tracto" value
+ * @method Registro  setCarreta()       Sets the current record's "Carreta" value
+ * @method Registro  setLugar()         Sets the current record's "Lugar" value
+ * @method Registro  setTipoCarga()     Sets the current record's "TipoCarga" value
+ * @method Registro  setMotivo()        Sets the current record's "Motivo" value
+ * @method Registro  setOperacion()     Sets the current record's "Operacion" value
+ * @method Registro  setSalida()        Sets the current record's "Salida" value
  * 
  * @package    transporte
  * @subpackage model
@@ -105,7 +105,7 @@ abstract class BaseRegistro extends sfDoctrineRecord
              ));
         $this->hasColumn('carreta_id', 'integer', null, array(
              'type' => 'integer',
-             'notnull' => true,
+             'notnull' => false,
              ));
         $this->hasColumn('lugar_id', 'integer', null, array(
              'type' => 'integer',
@@ -130,7 +130,6 @@ abstract class BaseRegistro extends sfDoctrineRecord
              ));
         $this->hasColumn('guia2', 'string', 15, array(
              'type' => 'string',
-             'notnull' => true,
              'length' => '15',
              ));
         $this->hasColumn('estado', 'integer', 1, array(
@@ -185,13 +184,15 @@ abstract class BaseRegistro extends sfDoctrineRecord
              'foreign' => 'id',
              'onDelete' => 'RESTRICT'));
 
-        $this->hasMany('Operacion', array(
+        $this->hasOne('Operacion', array(
              'local' => 'id',
-             'foreign' => 'registro_id'));
+             'foreign' => 'registro_id',
+             'onDelete' => 'RESTRICT'));
 
-        $this->hasMany('Salida', array(
+        $this->hasOne('Salida', array(
              'local' => 'id',
-             'foreign' => 'registro_id'));
+             'foreign' => 'registro_id',
+             'onDelete' => 'RESTRICT'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);

@@ -1,16 +1,7 @@
 <?php use_helper('ysJQueryRevolutions') ?>
-<?php use_helper('Date') ?>
+<?php use_helper('ysUtil') ?>
 
 <h1>Pendientes para <?php echo $titulo ?></h1>
-
-<div>
-  N&ordm; <span id="numero"></span>
-
-<span id="crono"></span>
-<a id="ini" href="#" onclick="IniciarCrono();$('#ini').hide();$('#det').show();">iniciar</a>
-<a id="det" style="display: none" href="#" onclick="DetenerCrono()">detener</a>
-</div>
-
 <table>
   <thead>
     <tr>
@@ -19,26 +10,50 @@
       <th>placa</th>
       <th>hora registro</th>
       <th>hora ingreso</th>
-      <th>inicio</th>
-      <th>fin</th>
+      <th>operacion</th>
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($registros as $registro): ?>
+    <?php foreach ($registros as $i => $registro): ?>
     <tr id="registro-<?php echo $registro->getId() ?>" class="<?php echo fmod($i, 2) ? 'even' : 'odd' ?>">
-      <td id="id-<?php echo $registro->getId() ?>"><?php echo $registro->getId() ?></td>
+      <td><?php echo $registro->getId() ?></td>
       <td><?php echo $registro->getChofer() ?></td>
       <td><?php echo $registro->getTracto() ?></td>
       <td><?php echo $registro->getCreatedAt() ?></td>
       <td><?php echo $registro->getIngresoAt() ?></td>
+      <td id="op-<?php echo $registro->getId() ?>">
+        <span id="crono-<?php echo $registro->getId() ?>" <?php echo ($registro->getEstado() == 1) ? 'style="display: none"' : '' ?> >
+        </span>
+        <input type="button" id="ini-<?php echo $registro->getId() ?>" value="Iniciar" <?php echo ($registro->getEstado() != 1) ? 'style="display: none"' : '' ?> />
+        <input type="button" id="fin-<?php echo $registro->getId() ?>" value="Detener" <?php echo ($registro->getEstado() == 1) ? 'style="display: none"' : '' ?> />
+      </td>
+<?php echo core_init_javasacript_tag() ?>
+<?php echo jquery_support('#ini-'.$registro->getId(),'click', 'ajaxConfirmIni'); ?>
+<?php echo jquery_support('#fin-'.$registro->getId(),'click', 'ajaxConfirmFin'); ?>
+  function ajaxConfirmIni(){
+    if(confirm('Iniciar la <?php echo $titulo ?> de la unidad Nº <?php echo $registro->getId() ?>, ¿esta seguro?')){
+      <?php echo jquery_ajax(array(
+        'url' => url_for('inicio', $registro),
+        'complete' => like_function("
+          $('#crono-".$registro->getId()."').show();
+          $('#fin-".$registro->getId()."').show();
+          $('#ini-".$registro->getId()."').hide();
+         "),
+      ));?>
+    }
+  }
+  function ajaxConfirmFin(){
+    if(confirm('Finalizar la <?php echo $titulo ?> de la unidad Nº <?php echo $registro->getId() ?>, ¿esta seguro?')){
+      <?php echo jquery_load(
+        '#op-'.$registro->getId(),
+        array(
+          'url' => url_for('detener',$registro),
+        )
+      )?>
+    }
+  }
+<?php echo core_end_javasacript_tag() ?>
     </tr>
-    <?php echo core_init_javasacript_tag() ?>
-    <?php echo jquery_support(
-      '#registro-'.$registro->getId(),
-      'click',
-      like_function("$('#numero').text($('#id-".$registro->getId()."').text())"));
-    ?>
-    <?php echo core_end_javasacript_tag() ?>
     <?php endforeach; ?>
   </tbody>
 </table>

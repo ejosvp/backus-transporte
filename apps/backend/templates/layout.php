@@ -4,7 +4,6 @@
   <head>
     <?php include_http_metas() ?>
     <?php include_title() ?>
-    <link rel="shortcut icon" href="/favicon.ico" />
     <?php use_stylesheet('admin.css') ?>
     <?php include_javascripts() ?>
     <?php include_stylesheets() ?>
@@ -13,10 +12,10 @@
     <div id="container">
       <div id="header">
         <?php use_helper('Date') ?>
-        <span class="fecha"><?php echo format_date(time(),'D','es_PE') ?></span>
-        <div class="backus"></div>
+        <div class="backus"><span class="fecha"><?php echo format_date(time(),'D','es_PE') ?></span></div>
         <h1>
           <span style="color: #f7cd19">&bull;</span>Distribución
+          <br /><span style="font-size: 12px">Sistema de control y seguimiento de unidades</span>
         </h1>
       </div>
 
@@ -32,6 +31,9 @@
           <li><?php echo link_to('Tipo Carga','@tipo_carga') ?></li>
           <li><?php echo link_to('Tipo Lugar','@tipo_lugar') ?></li>
           <li><?php echo link_to('Tracto','@tracto') ?></li>
+          <li><?php echo link_to('Usuarios','@sf_guard_user') ?></li>
+          <li><?php echo link_to('Grupos','@sf_guard_group') ?></li>
+          <li><?php echo link_to('Permisos','@sf_guard_permission') ?></li>
           <li><?php echo link_to('Salir','@sf_guard_signout') ?></li>
         </ul>
       </div>

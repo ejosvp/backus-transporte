@@ -1,3 +1,48 @@
+#vision
+vision:
+  url:     /vision
+  param:   { module: vision, action: index }
+
+#registro
+registro:
+  class:   sfDoctrineRouteCollection
+  options: { model: Registro }
+
+registrar:
+  url:     /registrar
+  param:   { module: registro, action: new }
+
+registrar_create:
+  url:     /registrar/create
+  param:   { module: registro, action: create }
+
+reload:
+  url:     /reload
+  param:   { module: registro, action: reload }
+
+loaddata:
+  url:     /loaddata
+  param:   { module: registro, action: load }
+
+#ingreso
+ingreso:
+  url:     /ingreso
+  param:   { module: registro, action: index }
+
+ingresar:
+  url:     /ingresar/:id
+  class:   sfDoctrineRoute
+  options: { model: Registro, type: object }
+  param:   { module: registro, action: ingreso }
+  requirements:
+    id: \d+
+    sf_method: [get]
+
+#operacion
+operacion:
+  class:   sfDoctrineRouteCollection
+  options: { model: Operacion }
+
 descarga:
   url:     /descarga
   class:   sfDoctrineRoute
@@ -14,42 +59,32 @@ carga:
   requirements:
     sf_method: [get]
 
-operacion:
-  class:   sfDoctrineRouteCollection
-  options: { model: Operacion }
-
-salida:
-  class:   sfDoctrineRouteCollection
-  options: { model: Salida }
-
-registro:
-  class:    sfDoctrineRouteCollection
-  options: { model: Registro }
-
-registrar:
-  url:     /registrar
-  param:   { module: registro, action: new }
-
-ingreso:
-  url:     /ingreso
-  param:   { module: registro, action: index }
-
-ingresar:
-  url:     /ingresar/:id
+inicio:
+  url:     /inicio/:id
   class:   sfDoctrineRoute
   options: { model: Registro, type: object }
-  param:   { module: registro, action: ingreso }
+  param:   { module: operacion, action: inicio }
   requirements:
     id: \d+
     sf_method: [get]
 
-reload:
-  url:     /reload
-  param:   { module: registro, action: reload }
+detener:
+  url:     /detener/:id
+  class:   sfDoctrineRoute
+  options: { model: Registro, type: object }
+  param:   { module: operacion, action: edit }
+  requirements:
+    id: \d+
+    sf_method: [get]
 
-loaddata:
-  url:     /loaddata
-  param:   { module: registro, action: load }
+fin:
+  url:     /fin
+  param:   { module: operacion, action: update }
+
+#salida
+salida:
+  class:   sfDoctrineRouteCollection
+  options: { model: Salida }
 
 # default rules
 homepage:
