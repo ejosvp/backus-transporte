@@ -17,13 +17,13 @@ abstract class BaseMotivoForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'id'   => new sfWidgetFormInputHidden(),
       'name' => new sfWidgetFormInputText(),
-      'tipo' => new sfWidgetFormInputCheckbox(),
+      'tipo' => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
       'id'   => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'name' => new sfValidatorString(array('max_length' => 40)),
-      'tipo' => new sfValidatorBoolean(),
+      'tipo' => new sfValidatorPass(),
     ));
 
     $this->widgetSchema->setNameFormat('motivo[%s]');
