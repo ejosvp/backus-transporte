@@ -12,6 +12,7 @@ class operacionActions extends sfActions
 {
   public function executeDescarga(sfWebRequest $request)
   {
+    $this->getUser()->setAttribute('activo', 'descarga');
     $this->registros = Doctrine::getTable('Registro')->getPorDescargar();
     $this->titulo = "Descarga";
     $this->getUser()->setAttribute('tipo',0);
@@ -20,6 +21,7 @@ class operacionActions extends sfActions
 
   public function executeCarga(sfWebRequest $request)
   {
+    $this->getUser()->setAttribute('activo', 'carga');
     $this->registros = Doctrine::getTable('Registro')->getPorCargar();
     $this->titulo = "Carga";
     $this->getUser()->setAttribute('tipo',1);
@@ -61,18 +63,37 @@ class operacionActions extends sfActions
   public function executeEdit(sfWebRequest $request)
   {
     $registro = $this->getRoute()->getObject();
-    $this->graba($registro);
-    $operacion = $registro->getOperacion();
-    $this->form = new OperacionForm($operacion);
+    $tipo = $this->getUser()->getAttribute('tipo');
+    $operacion = $registro->getOpera($tipo);
+    $check = " ";
+    if($tipo == '0')
+      $check = "<input type=checkbox name=check value=1> Carga";
+    $registro->setEstado(5);
+    $registro->save();
+    $operacion->setTerminoAt(date('Y-m-d H:i:s', time()));
+    $operacion->save();
+    $form = new OperacionForm($operacion);
+    $this->renderPartial('form', array('form' => $form, 'check' => $check));
+    return sfView::NONE;
   }
 
   public function executeUpdate(sfWebRequest $request)
   {
-    $this->form = new OperacionForm($this->getRoute()->getObject());
+    $operacion = $this->getRoute()->getObject();
+    $this->form = new OperacionForm($operacion);
 
     $this->processForm($request, $this->form);
 
-    //$this->setTemplate('edit');
+    if($request->getParameter('check',false) == '1') {
+      $registro = $operacion->getRegistro();
+      $registro->setEstado(3);
+      $registro->save();
+    }
+    if($operacion->getTipo() == 0)
+      $this->redirect('descarga');
+    else
+      $this->redirect('carga');
+    return sfView::NONE;
   }
 
   public function executeDelete(sfWebRequest $request)
@@ -83,28 +104,12 @@ class operacionActions extends sfActions
 
     $this->redirect('operacion/index');
   }
-
-  protected function graba($registro)
-  {
-    $operacion = $registro->getOperacion();
-    $tipo = $operacion->getTipo();
-    if($tipo == '0')
-      $registro->setEstado(3);
-    else
-      $registro->setEstado(5);
-    $registro->save();
-    $operacion->setTerminoAt(date('Y-m-d H:i:s', time()));
-    $operacion->save();
-    return sfView::NONE;
-  }
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
     {
       $operacion = $form->save();
-
-      //$this->redirect('operacion/edit?id='.$operacion->getId());
     }
   }
 }

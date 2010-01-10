@@ -12,21 +12,29 @@ class salidaActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    $this->salidas = Doctrine::getTable('Registro')->getPorSalir();
+    $this->getUser()->setAttribute('activo', 'salida');
+    $this->registros = Doctrine::getTable('Registro')->getPorSalir();
   }
 
   public function executeNew(sfWebRequest $request)
   {
+    $registro = $this->getRoute()->getObject();
     $this->form = new SalidaForm();
+    $this->form->setDefault('registro_id', $registro->getId());
+    $this->form->setDefault('chofer_id', $registro->getChofer()->getId());
+    $this->form->setDefault('tracto_id', $registro->getTracto()->getId());
+    $this->form->setDefault('carreta_id', $registro->getCarreta()->getId());
+    $this->reg_id = $registro->getId();
   }
 
   public function executeCreate(sfWebRequest $request)
   {
+    $registro = $this->getRoute()->getObject();
+    $registro->setEstado(6);
+    $registro->save();
     $this->form = new SalidaForm();
 
     $this->processForm($request, $this->form);
-
-    $this->setTemplate('new');
   }
 
   public function executeEdit(sfWebRequest $request)
@@ -59,7 +67,7 @@ class salidaActions extends sfActions
     {
       $salida = $form->save();
 
-      $this->redirect('salida/edit?id='.$salida->getId());
+      $this->redirect('salida');
     }
   }
 }

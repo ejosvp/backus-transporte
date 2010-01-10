@@ -21,7 +21,7 @@ abstract class BaseSalidaFormFilter extends BaseFormFilterDoctrine
       'lugar_id'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Lugar'), 'add_empty' => true)),
       'cantidad'      => new sfWidgetFormFilterInput(),
       'guia1'         => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'guia2'         => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'guia2'         => new sfWidgetFormFilterInput(),
       'observacion'   => new sfWidgetFormFilterInput(),
       'created_at'    => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'updated_at'    => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),

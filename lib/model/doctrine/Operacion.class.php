@@ -12,5 +12,11 @@
  */
 class Operacion extends BaseOperacion
 {
-
+  public function getTurno()
+  {
+    if ($this->getDateTimeObject('created_at')->format('G') < sfConfig::get('app_cambio_turno'))
+      return "1";
+    else
+      return "2";
+  }
 }

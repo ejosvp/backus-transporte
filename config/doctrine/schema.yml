@@ -1,3 +1,10 @@
+Opciones:
+  columns:
+    name:
+      type: string(40)
+      notnull: true
+    value:
+      type: string(255)
 Area:
   columns:
     id:
@@ -35,7 +42,7 @@ Motivo:
       type: string(40)
       notnull: true
     tipo:
-      type: boolean
+      type: int(1)
       notnull: true
 Supervisor:
   columns:
@@ -256,13 +263,12 @@ Registro:
       onDelete: RESTRICT
       local: motivo_id
       foreign: id
-    Operacion:
-      onDelete: RESTRICT
+    Operaciones:
+      type: many
+      class: Operacion
       local: id
-      foreignAlias: Registros
       foreign: registro_id
     Salida:
-      onDelete: RESTRICT
       local: id
       foreign: registro_id
       foreignAlias: Registro
@@ -296,8 +302,6 @@ Operacion:
       local: supervisor_id
       foreign: id
     Registro:
-      onDelete: RESTRICT
-      foreignAlias: Operaciones
       local: registro_id
       foreign: id
 Salida:
@@ -319,7 +323,6 @@ Salida:
       notnull: true
     carreta_id:
       type: integer
-      notnull: true
     tipo_carga_id:
       type: integer
       notnull: true
@@ -333,7 +336,6 @@ Salida:
       notnull: true
     guia2:
       type: string(15)
-      notnull: true
     observacion:
       type: string
   relations:

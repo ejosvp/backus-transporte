@@ -14,12 +14,12 @@ abstract class BaseMotivoFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'name' => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'tipo' => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
+      'tipo' => new sfWidgetFormFilterInput(array('with_empty' => false)),
     ));
 
     $this->setValidators(array(
       'name' => new sfValidatorPass(array('required' => false)),
-      'tipo' => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
+      'tipo' => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('motivo_filters[%s]');
@@ -41,7 +41,7 @@ abstract class BaseMotivoFormFilter extends BaseFormFilterDoctrine
     return array(
       'id'   => 'Number',
       'name' => 'Text',
-      'tipo' => 'Boolean',
+      'tipo' => 'Text',
     );
   }
 }

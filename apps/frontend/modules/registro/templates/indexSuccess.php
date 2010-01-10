@@ -20,7 +20,7 @@
   </thead>
   <tbody>
     <?php foreach ($registros as $i => $registro): ?>
-   <tr id="registro-<?php echo $registro->getId() ?>" class="<?php echo fmod($i, 2) ? 'even' : 'odd' ?> addPointer">
+    <tr id="registro-<?php echo $registro->getId() ?>" class="<?php echo fmod($i, 2) ? 'even' : 'odd' ?> addPointer">
       <td><?php echo $registro->getId() ?></td>
       <td><?php echo $registro->getTurno() ?></td>
       <td><?php echo $registro->getEmpresa() ?></td>

@@ -181,3 +181,13 @@ body
   padding: 5px;
   color: #b81900;
 }
+
+.crono {
+  background: url('/images/icon/crono.gif') no-repeat;
+  padding-left: 140px;
+  background-position: center center;
+}
+
+.visionList {
+  font-size: 0.8em;
+}

@@ -12,8 +12,7 @@ class visionActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    $this->registros = Doctrine::getTable('Registro')
-      ->createQuery('a')
-      ->execute();
+    $this->getUser()->setAttribute('activo', 'vision');
+    $this->registros = Doctrine::getTable('Registro')->getVision();
   }
 }
