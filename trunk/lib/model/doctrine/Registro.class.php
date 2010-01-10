@@ -19,8 +19,34 @@ class Registro extends BaseRegistro
     else
       return "2";
   }
+  public function getTurnoIngreso()
+  {
+    if ($this->getDateTimeObject('ingreso_at')->format('G') < sfConfig::get('app_cambio_turno'))
+      return "1";
+    else
+      return "2";
+  }
   public function getGuia()
   {
-    return $this->getGuia1()."/".$this->getGuia1();
+    return $this->getGuia1()."/".$this->getGuia2();
+  }
+  public function getOpera($tipo)
+  {
+    foreach ($this->getOperaciones() as $operacion)
+    {
+      if($operacion->getTipo() == $tipo)
+        return $operacion;
+    }
+    return false;
+  }
+  public function ingresado()
+  {
+    if($this->getEstado() >= 1)
+      return true;
+  }
+  public function salido()
+  {
+    if($this->getEstado() >= 5)
+      return true;
   }
 }

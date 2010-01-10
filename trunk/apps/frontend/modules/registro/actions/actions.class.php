@@ -42,6 +42,7 @@ class registroActions extends sfActions
 
   public function executeIndex(sfWebRequest $request)
   {
+    $this->getUser()->setAttribute('activo', 'ingreso');
     $this->registros = Doctrine::getTable('Registro')->getPorIngresar();
   }
 
@@ -59,6 +60,7 @@ class registroActions extends sfActions
 
   public function executeNew(sfWebRequest $request)
   {
+    $this->getUser()->setAttribute('activo', 'registro');
     $this->formExtend = array(
       'area' => new sfWidgetFormDoctrineChoice(array(
         'model' => 'Area',

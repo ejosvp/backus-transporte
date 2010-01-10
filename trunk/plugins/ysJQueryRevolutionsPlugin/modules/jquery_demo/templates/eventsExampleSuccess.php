@@ -131,7 +131,8 @@ echo add_jquery_support(
 </ul>
 
 <?php
-  echo
+  /* BEFORE the creation of jquery_execute function
+  /*echo
       add_jquery_support(
       'document',
       'ready' ,
@@ -142,18 +143,23 @@ echo add_jquery_support(
             like_function('$(this).css({"list-style-type":"disc", "color":"blue"});'),
             like_function('$(this).css({"list-style-type":"disc", "color":"red"});'),
             like_function('$(this).css({"list-style-type":"", "color":"yellow"});'),
-        )))); ?>
+        )))); */
 
-<?php
-echo add_jquery_support(
-      'document',
-      'ready' ,
-      like_function(
-        jquery_hover_event(
-          'li',
-          array(
-            like_function('$(this).append($("<span> ******** </span>"));'),
-            like_function('$(this).find("span:last").remove();'))))); ?>
+ /* Now with jquery_execute*/
+  echo jquery_execute(
+         jquery_toggle_event(
+           'li',
+           array(
+             like_function('$(this).css({"list-style-type":"disc", "color":"blue"});'),
+             like_function('$(this).css({"list-style-type":"disc", "color":"red"});'),
+             like_function('$(this).css({"list-style-type":"", "color":"yellow"});')))); ?>
+
+<?php echo  jquery_execute(
+              jquery_hover_event(
+                'li',
+                array(
+                  like_function('$(this).append($("<span> ******** </span>"));'),
+                  like_function('$(this).find("span:last").remove();')))); ?>
 
 <br>
 
@@ -248,8 +254,14 @@ echo jquery_ajax_form(
         'url' => url_for('jquery_demo/sayhello'),
         'success' =>  like_function("$('#divResults').html(data)" , 'data'),
         'data' => "'anotherParam=helloworld'",
+        'confirmation' => 'Do you want ajax submit',
+        'onNoConfirmation' => 'alert("Not submitted")',
+        'condition' => '$("#chkCondition").attr("checked") == true',
+        'onFailureCondition' => 'alert("Check the submit option")',
         'type' => 'POST'))?>
 <div id="divResults"></div>
+<br>
+<b>Condition for Submit:</b> <input type="checkbox" id="chkCondition" checked="false" />
 
 
 

@@ -16,4 +16,10 @@ class Tracto extends BaseTracto
   {
     return $this->getPlaca();
   }
+  public function getT77()
+  {
+    if($this->getPropia())
+     return "no";
+    return "T77";
+  }
 }

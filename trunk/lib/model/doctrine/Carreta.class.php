@@ -16,4 +16,8 @@ class Carreta extends BaseCarreta
   {
     return (!is_null($this->getPlaca()) ? $this->getPlaca() : '' );
   }
+  public function getUnidad()
+  {
+    return (!is_null($this->getTipoUnidad()) ? $this->getTipoUnidad() : '' );
+  }
 }

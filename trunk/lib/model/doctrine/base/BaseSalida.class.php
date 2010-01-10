@@ -87,7 +87,6 @@ abstract class BaseSalida extends sfDoctrineRecord
              ));
         $this->hasColumn('carreta_id', 'integer', null, array(
              'type' => 'integer',
-             'notnull' => true,
              ));
         $this->hasColumn('tipo_carga_id', 'integer', null, array(
              'type' => 'integer',
@@ -107,7 +106,6 @@ abstract class BaseSalida extends sfDoctrineRecord
              ));
         $this->hasColumn('guia2', 'string', 15, array(
              'type' => 'string',
-             'notnull' => true,
              'length' => '15',
              ));
         $this->hasColumn('observacion', 'string', null, array(

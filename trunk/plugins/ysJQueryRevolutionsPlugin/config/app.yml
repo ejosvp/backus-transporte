@@ -8,14 +8,19 @@ all:
 
     ### To load jQuery from localhost
     ### - Only available jquery.min.js
-    ys_jquery_path: /ysJQueryRevolutionsPlugin/js/jquery/jquery-1.3.2.min.js
+    ys_jquery_path:   /ysJQueryRevolutionsPlugin/js/jquery/jquery-1.3.2.min.js
+    ys_jquery_css:    /ysJQueryRevolutionsPlugin/css
+    ys_jquery_images: /ysJQueryRevolutionsPlugin/images
+    ys_jquery_plugins_folder: /ysJQueryRevolutionsPlugin/js/jquery/plugins
 
-    ### Uses structured configuration if you use plugins.
-    #ys_jquery_web_dir: ysJQueryRevolutionsPlugin
-    #ys_jquery_js_dir:  jquery
-    #ys_jquery_core: jquery-1.3.2.min.js
-    #ys_jquery_plugins_folder: plugins
-    #ys_jquery_js_folder:  js
-    #ys_jquery_css_folder: css
-    #ys_jquery_images_folder: images
-    #path_separattor:       '/'
+    ys_jquery_plugins:
+      auto_complete:
+        local: true
+        js_files:  [jquery.autocomplete.pack.js, jquery.bgiframe.min.js]
+        css_files: [jquery.autocomplete.css]
+        default_options:
+          #multiple:  true
+          #multipleSeparator: ' | '
+          oddClass:  ui-state-default
+          evenClass: ui-state-hover
+          overClass: ui-state-active

@@ -1,3 +1,12 @@
+opciones:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Opciones
+    module:               opciones
+    prefix_path:          /opciones
+    column:               id
+    with_wildcard_routes: true
+
 tracto:
   class: sfDoctrineRouteCollection
   options:

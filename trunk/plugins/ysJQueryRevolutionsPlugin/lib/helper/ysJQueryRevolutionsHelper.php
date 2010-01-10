@@ -22,30 +22,40 @@ sfContext::getInstance()
  */
 function jquery_ajax($configurations = null, $isInternal = false){
   if(is_array($configurations) && sizeof($configurations) > 0){
-    $frequency = '';
-    $endFrequency = '';
+    $suffix = '';
+    $prefix = '';
     if (isset($configurations['frequency'])){
-        $frequency ='setInterval(function(){';
-        $endFrequency = '}, '. ((int)$configurations['frequency'] * 1000)  .')';
+        $suffix ='setInterval(function(){';
+        $prefix = '}, '. ((int)$configurations['frequency'] * 1000)  .')';
     }
-    if(isset($configurations['listener']) && is_array($configurations['listener']) ){
+    if (isset($configurations['condition']) && trim($configurations['condition']) != ''){
+      $prefix = (isset($configurations['onFailureCondition'])) ? sprintf('} else {%s} ', $configurations['onFailureCondition']) . $prefix: '}'. $prefix;
+      $suffix .= sprintf("if(%s){ ",$configurations['condition']);
+    }
+    if (isset($configurations['confirmation']) && trim($configurations['confirmation']) != ''){
+      $prefix = (isset($configurations['onNoConfirmation'])) ? sprintf('} else {%s} ', $configurations['onNoConfirmation']) . $prefix: '}'. $prefix;
+      $suffix .= sprintf("if(confirm('%s')){ ",$configurations['confirmation']);
+    }
 
+
+
+    if(isset($configurations['listener']) && is_array($configurations['listener']) ){
         $listener =  $configurations['listener'];
         $selector =  (isset($listener['selector'])) ? $listener['selector'] : 'document';
         $event =     (isset($listener['event'])) ? $listener['event'] : 'ready';
         $ajaxTemplate = ui_ajax_pattern($configurations);
         if($isInternal){
-            return  $frequency. jquery_support(
+            return  $suffix. jquery_support(
                     $selector,
-                    $event,like_function($frequency. jquery_support(null, 'ajax' , $ajaxTemplate) . $endFrequency)) ;
+                    $event,like_function($suffix. jquery_support(null, 'ajax' , $ajaxTemplate) . $prefix)) ;
         }else{
             return add_jquery_support(
                     $selector,
-                    $event,like_function($frequency . jquery_support(null, 'ajax' , $ajaxTemplate) . $endFrequency));
+                    $event,like_function($suffix . jquery_support(null, 'ajax' , $ajaxTemplate) . $prefix));
         }
     }else{
          $ajaxTemplate = ui_ajax_pattern($configurations);
-         return $frequency . jquery_support(null, 'ajax' , $ajaxTemplate) . $endFrequency ;
+         return $suffix . jquery_support(null, 'ajax' , $ajaxTemplate) . $prefix ;
     }
   }
 }
@@ -307,6 +317,15 @@ function jquery_toggle_event($selector, $functions){
   return dry_toggle_hover_events('toggle', $selector, $functions);
 }
 
+/**
+ * Execute immediately a javascript function
+ * @param string $function The function code
+ * @param string $selector A jQuery Selector
+ * @param string $selector A jQuery Event
+ */
+function jquery_execute($function, $selector = 'document', $event = 'ready'){
+  return add_jquery_support($selector,$event, like_function($function));
+}
 
 /**
  * Simulates hovering (moving the mouse on, and off, an object).
@@ -460,7 +479,7 @@ function core_get_jq_alert_message($message){
  * @param string $accesors Accesor for the jQuery object
  * @return string jQuery syntax
  */
-function jquery_support($selector , $events = 'ready' , $args ="function(){return false;}", $unescapeId = true, $accesors = '', $addSeparator = true){
+function jquery_support($selector , $events = 'ready' , $args ="", $unescapeId = true, $accesors = '', $addSeparator = true){
   if(is_array($events)){
     $jquery = '';
     foreach($events as $event => $arg){
@@ -475,7 +494,7 @@ function jquery_support($selector , $events = 'ready' , $args ="function(){retur
 /**
  * Internal function don't use.
  */
-function jquery_sintax_builder($selector , $events = 'ready' , $args ="function(){return false;}", $unescapeId = true, $accesors = '', $addSeparator = true){
+function jquery_sintax_builder($selector , $events = 'ready' , $args ="", $unescapeId = true, $accesors = '', $addSeparator = true){
     $separator = ($addSeparator == true) ? ';' : '';
     if(!is_null($selector)){
       if(is_array($selector) && sizeof($selector) > 1){
@@ -572,7 +591,9 @@ function ui_ajax_pattern($configuration){
     if(isset($configuration['url'])){           $pattern .= toJQueryOption('url', $configuration['url']); }
     if(isset($configuration['username'])){      $pattern .= toJQueryOption('username', $configuration['username']); }
     if(isset($configuration['xhr'])){           $pattern .= toJQueryOption('xhr', $configuration['xhr'], true); }
-    $pattern = substr($pattern,0,(strlen($pattern)) - 1);
+
+    if($pattern != '{')
+      $pattern = substr($pattern,0,(strlen($pattern)) - 1);
     $pattern .= '}';
   }
   return $pattern;
@@ -641,14 +662,25 @@ function return_jquery($configurations, $sintax){
   $finalSintax = $sintax;
   if(is_array($configurations) && isset($configurations['listener']) ){
       $listener = $configurations['listener'];
-      if(isset($listener['event']) && isset($listener['selector'])){
+      if((isset($listener['event']) || isset($listener['oneEvent'])) && isset($listener['selector'])){
+        $listener['event'] = (isset($listener['oneEvent'])) ? $listener['oneEvent'] : $listener['event'];
         $finalSintax = '';
-        if(isset($listener['before'])){
-          $finalSintax .= add_jquery_support($listener['selector'],$listener['event'],$listener['before']);
-        }
-          $finalSintax .= add_jquery_support($listener['selector'],$listener['event'],like_function($sintax));
-        if(isset($listener['after'])){
-          $finalSintax .= add_jquery_support($listener['selector'],$listener['event'],$listener['after']);
+        if(isset($listener['oneEvent'])){
+          if(isset($listener['before'])){
+            $finalSintax .= jquery_execute(jquery_one_event($listener['selector'],$listener['event'],$listener['before']));
+          }
+            $finalSintax .= jquery_execute(jquery_one_event($listener['selector'], $listener['event'] , like_function($sintax)));
+          if(isset($listener['after'])){
+            $finalSintax .= jquery_execute(jquery_one_event($listener['selector'],$listener['event'],$listener['after']));
+          }
+        }else{
+          if(isset($listener['before'])){
+            $finalSintax .= add_jquery_support($listener['selector'],$listener['event'],$listener['before']);
+          }
+            $finalSintax .= add_jquery_support($listener['selector'],$listener['event'],like_function($sintax));
+          if(isset($listener['after'])){
+            $finalSintax .= add_jquery_support($listener['selector'],$listener['event'],$listener['after']);
+          }
         }
       }
   }
@@ -744,6 +776,27 @@ function toJsArgument($value, $isFunction = false){
     }
   return $pattern;
 }
+
+function add_js($filesName, $path, $position='last'){
+  if(!is_array($filesName)){
+    sfContext::getInstance()->getResponse()->addJavascript($path . $filesName, $position);
+  }else{
+    foreach ($filesName as $files){
+      sfContext::getInstance()->getResponse()->addJavascript($path . $files, $position);
+    }
+  }
+}
+
+function add_css($filesName, $path, $position='last'){
+  if(!is_array($filesName)){
+    sfContext::getInstance()->getResponse()->addStylesheet($path . $filesName, $position);
+  }else{
+    foreach ($filesName as $files){
+      sfContext::getInstance()->getResponse()->addStylesheet($path . $files, $position);
+    }
+  }
+}
+
 
 /**
  * Internal function don't use.

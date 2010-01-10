@@ -18,12 +18,6 @@
     </tfoot>
     <tbody>
       <tr>
-        <th>Hora</th>
-        <td>
-          <span id="hora"></span>
-        </td>
-      </tr>
-      <tr>
         <th>Turno</th>
         <td>
           <?php
@@ -128,7 +122,4 @@
     filtro("<?php echo url_for('@loaddata') ?>",'#carreta_propia','Carreta','#registro_carreta_id','propia');
     filtro("<?php echo url_for('@loaddata') ?>",'#carreta_tara','Carreta','#registro_carreta_id','tara');
     filtro("<?php echo url_for('@loaddata') ?>",'#carreta_tipo_unidad','Carreta','#registro_carreta_id','tipo_unidad');
-
-  /* reloj */
-  reloj();
 </script>

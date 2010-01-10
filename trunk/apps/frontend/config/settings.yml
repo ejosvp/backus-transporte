@@ -38,7 +38,10 @@ all:
     enabled_modules:        [default, sfGuardAuth]
 
     # Default Culture
-    default_culture:        es
+    default_culture:        es_ES
+
+    # Standar Helpers
+    standard_helpers:       [Partial, ysUtil, ysJQueryRevolutions]
 
   .actions:
 

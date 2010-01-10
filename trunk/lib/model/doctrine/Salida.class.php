@@ -12,5 +12,15 @@
  */
 class Salida extends BaseSalida
 {
-
+  public function getTurno()
+  {
+    if ($this->getDateTimeObject('created_at')->format('G') < sfConfig::get('app_cambio_turno'))
+      return "1";
+    else
+      return "2";
+  }
+  public function getGuia()
+  {
+    return $this->getGuia1()."/".$this->getGuia2();
+  }
 }

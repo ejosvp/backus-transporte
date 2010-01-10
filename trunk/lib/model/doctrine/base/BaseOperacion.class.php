@@ -78,8 +78,7 @@ abstract class BaseOperacion extends sfDoctrineRecord
 
         $this->hasOne('Registro', array(
              'local' => 'registro_id',
-             'foreign' => 'id',
-             'onDelete' => 'RESTRICT'));
+             'foreign' => 'id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);

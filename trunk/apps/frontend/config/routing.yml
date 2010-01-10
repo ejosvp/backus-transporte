@@ -4,10 +4,6 @@ vision:
   param:   { module: vision, action: index }
 
 #registro
-registro:
-  class:   sfDoctrineRouteCollection
-  options: { model: Registro }
-
 registrar:
   url:     /registrar
   param:   { module: registro, action: new }
@@ -83,8 +79,25 @@ fin:
 
 #salida
 salida:
-  class:   sfDoctrineRouteCollection
-  options: { model: Salida }
+  url:     /salida
+  param:   { module: salida, action: index }
+
+salida_new:
+  url:     /salida/:id
+  class:   sfDoctrineRoute
+  options: { model: Registro, type: object }
+  param:   { module: salida, action: new }
+  requirements:
+    id: \d+
+    sf_method: [get]
+
+salida_create:
+  url:     /salida/crear
+  class:   sfDoctrineRoute
+  options: { model: Registro, type: object }
+  param:   { module: salida, action: create }
+  requirements:
+    sf_method: [post]
 
 # default rules
 homepage:
