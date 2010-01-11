@@ -7,12 +7,12 @@
  * 
  * @property integer $id
  * @property string $name
- * @property boolean $tipo
+ * @property int $tipo
  * @property Doctrine_Collection $Registro
  * 
  * @method integer             getId()       Returns the current record's "id" value
  * @method string              getName()     Returns the current record's "name" value
- * @method boolean             getTipo()     Returns the current record's "tipo" value
+ * @method int                 getTipo()     Returns the current record's "tipo" value
  * @method Doctrine_Collection getRegistro() Returns the current record's "Registro" collection
  * @method Motivo              setId()       Sets the current record's "id" value
  * @method Motivo              setName()     Sets the current record's "name" value
@@ -39,9 +39,10 @@ abstract class BaseMotivo extends sfDoctrineRecord
              'notnull' => true,
              'length' => '40',
              ));
-        $this->hasColumn('tipo', 'boolean', null, array(
-             'type' => 'boolean',
+        $this->hasColumn('tipo', 'int', 1, array(
+             'type' => 'int',
              'notnull' => true,
+             'length' => '1',
              ));
     }
 
