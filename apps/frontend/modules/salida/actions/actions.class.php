@@ -35,6 +35,9 @@ class salidaActions extends sfActions
     $this->form = new SalidaForm();
 
     $this->processForm($request, $this->form);
+
+    $this->reg_id = $registro->getId();
+    $this->setTemplate('new');
   }
 
   public function executeEdit(sfWebRequest $request)
