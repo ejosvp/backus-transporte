@@ -10,7 +10,9 @@
       <th>placa</th>
       <th>registro</th>
       <th>ingreso</th>
-        <th>termino descarga</th>
+      <?php if($sf_user->getAttribute('tipo') == 1) : ?>
+        <th>Termino de Descarga</th>
+      <?php endif; ?>
       <th>operacion</th>
     </tr>
   </thead>
@@ -22,9 +24,11 @@
       <td><?php echo $registro->getTracto() ?></td>
       <td><?php echo $registro->getCreatedAt() ?></td>
       <td><?php echo $registro->getIngresoAt() ?></td>
-      <?php if(is_object($registro->getOpera(0))) : ?>
-        <td><?php echo $registro->getOpera(0)->getTerminoAt() ?></td>
-      <?php else : ?><td></td><?php endif; ?>
+      <?php if($sf_user->getAttribute('tipo') == 1) : ?>
+        <?php if($registro->getOpera(0)) : ?>
+          <td><?php echo $registro->getOpera(0)->getTerminoAt() ?></td>
+        <?php else : ?><td></td><?php endif; ?>
+      <?php endif; ?>
       <td id="op-<?php echo $registro->getId() ?>">
         <input type="button" id="ini-<?php echo $registro->getId() ?>" value="Iniciar" <?php echo ($registro->getEstado() == 1 || $registro->getEstado() == 3) ? '' : 'style="display: none"' ?> />
         <input type="button" id="fin-<?php echo $registro->getId() ?>" value="Detener" <?php echo ($registro->getEstado() == 2 || $registro->getEstado() == 4) ? '' : 'style="display: none"' ?> />

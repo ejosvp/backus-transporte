@@ -58,7 +58,7 @@
       <th>Tiempo Atencion</th>    <!-- 28 -->  <!-- hora inicio descarga  - hora termino descarga -->
       <th>Supervisor</th>         <!-- 29 -->
       <th>Obs Descarga</th>       <!-- 30 -->
-      <th>Tiempo Desc a Carg</th> <!-- 31 --> <!-- hora inicio carga  - hora termino descarga -->
+      <th>Tiempo Desc/Ingr a Carg</th> <!-- 31 --> <!-- hora inicio carga  - hora termino descarga -->
       <th>Obs Demora </th>        <!-- 32 --> <!-- Obs demora para descargar vehiculo comun -->
       <th>Obs Demora T77</th>     <!-- 33 --> <!-- obs demora para descargar T777 -->
 
@@ -125,6 +125,7 @@
         <td><?php echo $registro->getTurnoIngreso() ?></td>                             <!-- 21 -->
         <td><?php echo time_unix_to_number($ingreso_demora,false) ?></td>   <!-- 22 -->
       <?php else : ?><td class="lock" colspan="4">sin ingreso</td><?php endif; ?>
+      <!-- FIN INGRESO -->
 
       <!-- CONTROL -->
       <?php if($descarga) : ?>
@@ -148,7 +149,12 @@
       <!-- CARGA -->
       <?php if($carga) : ?><!-- 31 -->
         <?php $carga_demora = $carga->getDateTimeObject('termino_at')->format('U') - $carga->getDateTimeObject('created_at')->format('U') ?>
+
+      <?php if($descarga) : ?>
         <td><?php echo time_unix_to_number($carga->getDateTimeObject('created_at')->format('U') - $descarga->getDateTimeObject('termino_at')->format('U'),false) ?></td>
+      <?php else : ?>
+        <td><?php echo time_unix_to_number($carga->getDateTimeObject('created_at')->format('U') - $registro->getDateTimeObject('ingreso_at')->format('U'),false) ?></td>
+      <?php endif; ?>
         <td><form><input type="text" /><input type="submit" value=">" /></form></td>
         <td><?php if($c_t77) : ?><form><input type="text" /><input type="submit" value=">" /></form><?php endif; ?></td>
         <td><?php echo $carga->getCreatedAt() ?></td>  <!-- 34- -->
@@ -201,7 +207,7 @@
         <td><?php echo $salida->getCantidad() ?></td>
         <td><?php echo $salida->getObservacion() ?></td>
 
-      <?php else : ?><td class="lock" colspan="15">sin ingreso</td><?php endif; ?>
+      <?php else : ?><td class="lock" colspan="15">sin salida</td><?php endif; ?>
       
     </tr>
     <?php endforeach; ?>
