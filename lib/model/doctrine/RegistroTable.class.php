@@ -40,6 +40,9 @@ class RegistroTable extends Doctrine_Table
   public function getPorSalir()
   {
     $q = $this->createQuery('c')
+            ->leftJoin('c.Chofer h')
+            ->leftJoin('c.Tracto t')
+            ->leftJoin('c.Operaciones o')
             ->where('c.estado = ?', 5);
     return $q->execute();
   }
@@ -51,6 +54,7 @@ class RegistroTable extends Doctrine_Table
       $fecha2 = $fecha1 + 86400;
     $q = $this->createQuery('c')
             ->leftJoin('c.Tracto t')
+            ->leftJoin('c.Carreta q')
             ->leftJoin('c.Chofer h')
             ->leftJoin('c.Lugar l')
             ->leftJoin('c.Empresa e')

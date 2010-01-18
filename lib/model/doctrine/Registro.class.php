@@ -46,7 +46,7 @@ class Registro extends BaseRegistro
   }
   public function salido()
   {
-    if($this->getEstado() >= 5)
+    if($this->getEstado() > 5)
       return true;
   }
 }
