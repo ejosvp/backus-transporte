@@ -29,8 +29,9 @@ class salidaActions extends sfActions
 
   public function executeCreate(sfWebRequest $request)
   {
-    $registro = $this->getRoute()->getObject();
+    $registro = Doctrine::getTable('Registro')->find($request->getParameter('reg_id'));
     $registro->setEstado(6);
+    $this->getUser()->setAttribute('reg', $registro->getId());
     $registro->save();
     $this->form = new SalidaForm();
 
