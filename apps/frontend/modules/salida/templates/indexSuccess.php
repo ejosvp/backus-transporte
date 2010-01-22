@@ -1,5 +1,5 @@
 <h1>Salidas List</h1>
-
+<?php echo $sf_user->getAttribute('reg') ?>
 <table>
   <thead>
     <tr>

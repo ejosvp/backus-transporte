@@ -1,7 +1,7 @@
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
 
-<form action="<?php echo url_for('@salida_create?id='.$reg_id) ?>" method="post">
+<form action="<?php echo url_for('@salida_create?reg_id='.$reg_id) ?>" method="post">
   <table>
     <tfoot>
       <tr>

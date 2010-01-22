@@ -93,8 +93,6 @@ salida_new:
 
 salida_create:
   url:     /salida/crear
-  class:   sfDoctrineRoute
-  options: { model: Registro, type: object }
   param:   { module: salida, action: create }
   requirements:
     sf_method: [post]
