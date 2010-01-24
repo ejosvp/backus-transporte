@@ -109,7 +109,9 @@
       <td><?php echo $registro->getTipoCarga() ?></td>                                <!-- 9 -->
       <td><?php echo $registro->getCantidad() ?></td>                                 <!-- 10 -->
       <td><?php echo $registro->getGuia() ?></td>                                     <!-- 11 -->
+      <?php if($registro->getCarreta()) : ?>
       <td><?php echo $registro->getCarreta()->getTipoUnidad() ?></td>                 <!-- 12 -->
+      <?php else : ?><td></td><?php endif; ?>
       <td><?php echo $registro->getTracto()->getT77() ?></td>                         <!-- 13 -->
       <td><?php echo $registro->getMotivo() ?></td>                                   <!-- 14 -->
       <td><?php echo $registro->getDateTimeObject('created_at')->format('d-m') ?></td><!-- 15 -->
