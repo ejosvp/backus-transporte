@@ -12,4 +12,13 @@
  */
 class Transporte
 {
+  static public $estado = array (
+    0 => 'pendiente de INGRESO',
+    1 => 'pendiente de DESCARGA',
+    2 => 'proceso de decarga',
+    3 => 'pendiente de CARGA',
+    4 => 'proceso de carga',
+    5 => 'pendiente de SALIDA',
+    6 => 'concluyo',
+  );
 }

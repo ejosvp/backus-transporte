@@ -1,10 +1,29 @@
 <?php use_helper('Date') ?>
-
-
 <?php $c_t77 = $sf_user->hasCredential('t77') ?>
-
-<h1>Vision</h1>
-
+<div class="headVision">
+<h1>Vision - <?php echo ($fecha) ? format_date($fecha,'D','es_PE') : format_date(time(),'D','es_PE') ?></h1>
+<form action="<?php echo url_for1('@vision')?>" method="post">
+  <?php echo $form; ?>
+  <input type="submit" value="Filtrar">
+</form>
+</div>
+<div class="estadistica">
+  <table>
+    <tr>
+      <th>Unidades Atendidas</th>
+      <td><b><?php echo $estadistica['atendidos'] ?></b></td>
+    </tr>
+    <tr>
+      <th>Unidades Pendientes de Ingreso</th>
+      <td><b><?php echo $estadistica['ingreso'] ?></b></td>
+    </tr>
+    <tr>
+      <th>Unidades Pendientes de Salida</th>
+      <td><b><?php echo $estadistica['salida'] ?></b></td>
+    </tr>
+  </table>
+</div>
+<div style="clear:both"></div>
 <table class="vision" style="width: 6500px">
   <thead>
     <tr>
@@ -98,7 +117,7 @@
     <?php $carga = $registro->getOpera(1) ?>
     <?php $salida = $registro->getSalida() ?>
     <tr id="registro-<?php echo $registro->getId() ?>" class="<?php echo fmod($i, 2) ? 'even' : 'odd' ?>">
-      <td><?php echo $registro->getEstado() ?></td>                                   <!-- 1 -->
+      <td class="estado-<?php echo $registro->getEstado() ?>"><?php echo $registro->getEstadoName() ?></td>                                   <!-- 1 -->
       <td><?php echo $registro->getId() ?></td>                                       <!-- 2 -->
       <td><?php echo $registro->getTipoCarga()->getArea() ?></td>                     <!-- 3 -->
       <td><?php echo $registro->getEmpresa() ?></td>                                  <!-- 4 -->

@@ -12,9 +12,9 @@ default:
     language:     es
     #robots:       index, follow
 
-  stylesheets:    [main, frontend]
+  stylesheets:    [main, frontend, ui-darkness/jquery-ui.css]
 
-  javascripts:    [transporte,jquery-ui]
+  javascripts:    [transporte,jquery, jquery-ui]
 
   has_layout:     true
   layout:         layout
