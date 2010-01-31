@@ -21,6 +21,49 @@ span.icon {
   border: #DDDDDD solid 1px;
 }
 
+/* VISION */
+
+.headVision {
+  padding: 7px;
+  float: left;
+  width: 400px;
+  margin: 7px;
+}
+
+.estadistica {
+  padding: 14px;
+  float: right;
+  width: 400px;
+}
+
+.estado-0{
+  background: red;
+  color: yellow;
+}
+.estado-1{
+  background: red;
+  color: yellow;
+}
+.estado-2{
+  background: yellow;
+  color: blue;
+}
+.estado-3{
+  background: red;
+  color: yellow;
+}
+.estado-4{
+  background: yellow;
+  color: blue;
+}
+.estado-5{
+  background: red;
+  color: yellow;
+}
+.estado-6{
+  background: black;
+  color: yellow;
+}
 
 /** MISC **/
 .even, .odd {
