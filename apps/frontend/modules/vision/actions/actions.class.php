@@ -13,6 +13,22 @@ class visionActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     $this->getUser()->setAttribute('activo', 'vision');
-    $this->registros = Doctrine::getTable('Registro')->getVision();
+    if($request->getParameter('fecha'))
+    {
+      $fecha = $request->getParameter('fecha');
+      $fecha = strtotime($fecha['day'].'-'.$fecha['month'].'-'.$fecha['year']);
+    }
+    else
+    {
+      $fecha = time();
+    }
+    $this->registros = Doctrine::getTable('Registro')->getVision($fecha);
+    $this->fecha = $fecha;
+    $this->form = new VisionForm();
+    $this->estadistica = array(
+      'atendidos' => Doctrine::getTable('Registro')->countEstadistica(6,$fecha),
+      'ingreso'   => Doctrine::getTable('Registro')->countEstadistica(0,$fecha),
+      'salida'    => Doctrine::getTable('Registro')->countEstadistica(5,$fecha),
+    );
   }
 }
