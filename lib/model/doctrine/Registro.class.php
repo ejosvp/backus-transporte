@@ -12,6 +12,10 @@
  */
 class Registro extends BaseRegistro
 {
+  public function getEstadoName()
+  {
+  return Transporte::$estado[$this->getEstado()];
+  }
   public function getTurno()
   {
     if ($this->getDateTimeObject('created_at')->format('G') < sfConfig::get('app_cambio_turno'))

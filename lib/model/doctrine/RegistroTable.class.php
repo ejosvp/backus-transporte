@@ -68,4 +68,16 @@ class RegistroTable extends Doctrine_Table
             ->andWhere('c.created_at > ?',date('Y-m-d', $fecha1)." 00:00:00");
     return $q->execute();
   }
+  public function countEstadistica($estado, $fecha1 = false, $fecha2 = false)
+  {
+    if(!$fecha1)
+      $fecha1 = time();
+    if(!$fecha2)
+      $fecha2 = $fecha1 + 86400;
+    $q = $this->createQuery('c')
+            ->where('c.estado = ?', $estado)
+            ->andwhere('c.created_at < ?',date('Y-m-d', $fecha2)." 00:00:00")
+            ->andWhere('c.created_at > ?',date('Y-m-d', $fecha1)." 00:00:00");
+    return $q->count();
+  }
 }
