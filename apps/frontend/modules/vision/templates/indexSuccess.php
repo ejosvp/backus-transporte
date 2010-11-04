@@ -201,7 +201,7 @@
       <?php else : ?><td colspan="2">sin carga y descarga</td><?php endif; ?>
       
       <!-- SALIDA -->
-      <?php if($registro->salido()) : ?>
+      <?php if($salida !== Null) : ?>
         <!-- tiempo entre proceso -->
         <?php if($descarga) : ?>
           <?php if($carga) : ?>
